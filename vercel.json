@@ -1,0 +1,19 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "installCommand": "npm ci",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "functions": {
+    "api/github-contributions.js": {
+      "maxDuration": 30,
+      "excludeFiles": ".env*"
+    }
+  },
+  "rewrites": [
+    { "source": "/projects", "destination": "/index.html" },
+    { "source": "/experience", "destination": "/index.html" },
+    { "source": "/resume", "destination": "/index.html" },
+    { "source": "/blog/:path*", "destination": "/index.html" }
+  ]
+}
