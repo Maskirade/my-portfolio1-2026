@@ -64,7 +64,7 @@ export default function GithubActivity() {
   return (
     <section id="github" className="px-6 sm:px-10 lg:px-16 py-24 border-t border-line">
       <Reveal>
-        <SectionHeader index="09" label="Activity" title="GitHub contributions" description="A live view of my GitHub activity." />
+        <SectionHeader index="10" label="Activity" title="GitHub contributions" description="A live view of my GitHub activity." />
       </Reveal>
 
       <Reveal>

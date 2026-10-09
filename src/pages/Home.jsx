@@ -7,6 +7,7 @@ import Experience from '../components/sections/Experience.jsx';
 import TechStack from '../components/sections/TechStack.jsx';
 import Certifications from '../components/sections/Certifications.jsx';
 import Recommendations from '../components/sections/Recommendations.jsx';
+import Affiliation from '../components/sections/Affiliation.jsx';
 import GithubActivity from '../components/sections/GithubActivity.jsx';
 import Contact from '../components/sections/Contact.jsx';
 
@@ -22,6 +23,7 @@ export default function Home() {
       <TechStack />
       <Certifications />
       <Recommendations />
+      <Affiliation />
       <GithubActivity />
       <Contact />
     </>
