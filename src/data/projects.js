@@ -30,7 +30,7 @@ export const projects = [
     id: 'project-three',
     title: 'EzQueue',
     description:
-      'EzQueue is an application built for seamless booking with our fellow barber shops and saloons within Philippines.',
+      'EzQueue is an application built for seamless booking with our fellow barber shops and salons within Philippines.',
     technologies: ['Flutter','Dart', 'PostgreSQL', 'Supabase'],
     category: 'Mobile App',
     image: '/images/projects/ezqueue2.png',
