@@ -4,7 +4,7 @@ export const gear = [
     id: 'gear-1',
     title: 'Acer Nitro AN515-54',
     category: 'Primary Workstation',
-    image: '/images/gears/acer_nitro.jpg',
+    image: '/images/gears/acer_nitro-transparent-v1.png',
     description:
       'Windows 11 Home Single Language 64-bit, Intel(R) Core(TM) i5-9300H CPU @2.40Hz (8 CPUs), ~2.4GHz, NVIDIA GeForce GTX 1650, 8GB RAM, 500GB SSD, 1TB HDD for backup',
     items: [
