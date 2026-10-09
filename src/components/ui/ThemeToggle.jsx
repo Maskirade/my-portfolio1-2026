@@ -5,7 +5,7 @@ export default function ThemeToggle({ theme, onToggle, className = '' }) {
   return (
     <button
       type="button"
-      onClick={onToggle}
+      onClick={(event) => onToggle(event.currentTarget)}
       aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
       aria-pressed={isDark}
       className={`relative inline-flex items-center w-12 h-6 rounded-full border border-line bg-bg-surface2 transition-colors duration-300 ${className}`}
