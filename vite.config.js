@@ -16,6 +16,15 @@ export default defineConfig(({ mode }) => {
   }
 
   return {
+    server: {
+      fs: {
+        // Preserve Vite's default protections and also block local originals.
+        deny: [
+          '.env', '.env.*', '*.{crt,pem,key,p12,pfx,cer,der}',
+          '.npmrc', '.yarnrc.yml', '**/.git/**', '**/.private/**',
+        ],
+      },
+    },
     plugins: [react(), {
       name: 'github-contributions-api',
       configureServer(server) {

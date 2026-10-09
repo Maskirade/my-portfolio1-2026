@@ -1,5 +1,6 @@
 .git
 .vercel
+.private/
 node_modules
 dist
 .env

@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@media print {
+  .certificate-preview-image {
+    display: none !important;
+  }
+}
+
 :root {
   /* Dark theme (default) — cinematic command-console palette */
   --color-bg: #0a0c0f;
