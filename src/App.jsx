@@ -8,6 +8,7 @@ import Blog from './pages/Blog.jsx';
 import BlogArticle from './pages/BlogArticle.jsx';
 import Projects from './pages/Projects.jsx';
 import Experience from './pages/Experience.jsx';
+import Affiliations from './pages/Affiliations.jsx';
 import Resume from './pages/Resume.jsx';
 import { useTheme } from './hooks/useTheme.js';
 import { useScrollSpy } from './hooks/useScrollSpy.js';
@@ -57,6 +58,7 @@ export default function App() {
               <Route path="/blog/:slug" element={<BlogArticle />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/experience" element={<Experience />} />
+              <Route path="/affiliations" element={<Affiliations />} />
               <Route path="/resume" element={<Resume />} />
             </Routes>
           </main>

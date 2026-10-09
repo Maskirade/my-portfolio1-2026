@@ -17,13 +17,19 @@ export const profile = {
   },
   resumeUrl: '/documents/resume/John_Raymart_Tenio_RESUME.docx/', // PLACEHOLDER — link to hosted resume PDF
   roles: ['Web Developer', 'Mobile App Developer', 'AI/ML Developer'],
-  affiliation: {
-    name: 'DevWorks Studio',
-    role: 'CTO & Programmer',
-    url: 'https://devworkstudios.net',
-    domain: 'devworksstudio.net',
-    initials: 'DW',
-  },
+  // Add entries here to update both the homepage preview and Affiliations page.
+  affiliations: [
+    {
+      id: 'devworks-studio',
+      name: 'DevWorks Studio',
+      role: 'CTO & Programmer',
+      description:
+        'I work with DevWorks Studio as CTO & Programmer, contributing to technical direction and software development.',
+      url: 'https://devworkstudios.net',
+      initials: 'DW',
+      logo: null, // Optional local logo path, for example /images/affiliations/studio.webp.
+    },
+  ],
   focus: [
     {
       label: 'Currently building',
