@@ -20,7 +20,7 @@ export const profile = {
   affiliation: {
     name: 'DevWorks Studio',
     role: 'CTO & Programmer',
-    url: 'https://devworksstudio.net',
+    url: 'https://devworkstudios.net',
     domain: 'devworksstudio.net',
     initials: 'DW',
   },
