@@ -15,7 +15,7 @@ export const profile = {
     facebook: 'https://www.facebook.com', // PLACEHOLDER — replace with actual Facebook URL
     email: 'teniojohnraymart@gmail.com', // PLACEHOLDER — replace with actual email
   },
-  resumeUrl: '/documents/resume/John_Raymart_Tenio_RESUME.docx/', // PLACEHOLDER — link to hosted resume PDF
+  resumeUrl: '/documents/resume/John_Raymart_Tenio_RESUME.pdf/', // PLACEHOLDER — link to hosted resume PDF
   roles: ['Web Developer', 'Mobile App Developer', 'AI/ML Developer'],
   // Add entries here to update both the homepage preview and Affiliations page.
   affiliations: [
