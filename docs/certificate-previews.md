@@ -1,89 +1,170 @@
-# Prepare a certificate preview yourself
+# Prepare certificate previews without hiding printed names
 
-This process runs locally with Python and Pillow. It does not use an AI service.
-Run the commands from the project folder in PowerShell.
+This workflow runs locally with Python and Pillow. It does not send certificates
+to an AI service. Original files stay in `.private/certificates/`; the website
+uses separate flattened WebP previews.
 
-## 1. Keep the original private
+## Why the first rectangular blurs hid names
 
-Put the original JPG or PNG in `.private/certificates/`. That folder is excluded
-from Git and Vercel, and the Vite development server blocks access to it.
-Only a processed preview should go in `public/images/certificates/`.
+A rectangle can contain both handwriting and printed letters. Blurring every
+pixel in that rectangle hides both. Simply copying the original name area back
+can expose the signature again when the two overlap.
 
-Install the image-processing library once:
+The revised workflow uses three tools:
+
+- **Shaped masks:** polygons cover the handwriting, with a small safety margin.
+- **Protected boxes:** keep original printed text only where no handwriting crosses it.
+- **Verified restoration:** where ink crosses a name, recover clean text from a
+  separate PDF layer when available, or recreate the exact verified wording
+  in a matching font. Never guess a name or invent letters.
+
+The public files are processed previews. Original certificates are not modified.
+
+## Run the saved Laravel recipe
+
+Install Pillow once if needed:
 
 ```powershell
 python -m pip install Pillow
 ```
 
-## 2. Find the signature coordinates
+Run commands from the project folder. The reviewed instructions are stored in
+`scripts/certificate-recipes.json`, and the website uses the `v2` previews.
 
-Generate a private grid to help locate the signatures:
-
-```powershell
-python scripts/blur_certificate.py --input ".private/certificates/Laravel-certificate.jpg" --guide ".private/certificate-guides/laravel-grid.png" --overwrite
-```
-
-Open the guide in an image viewer or Paint. Each grid cell is 100 pixels wide
-and high. In Paint, the cursor's pixel coordinates help refine the rectangle.
-The top-left corner of the image is `(0, 0)`: X increases to the right and Y
-increases downward. Use the guide's orientation when measuring; the script
-applies the original image's EXIF rotation before processing.
-
-Each `--box` takes **left, top, right, bottom**, measured in pixels. These are
-two opposite corners, not a width and height. Include every pen stroke and
-a small margin. If handwriting overlaps a printed name, that overlapping
-area must also be blurred to cover the signature completely.
-
-The Laravel certificate uses these two boxes:
-
-| Signature | Left | Top | Right | Bottom |
-| --- | ---: | ---: | ---: | ---: |
-| Left | 366 | 730 | 438 | 820 |
-| Right | 812 | 744 | 878 | 822 |
-
-## 3. Export a separate blurred image
-
-The portfolio already uses `laravel-workshop-v1.webp`. This example creates
-a separate `v2` so you can practice without replacing the existing preview.
+For practice, generate a separate `v3` without replacing the current preview:
 
 ```powershell
 python scripts/blur_certificate.py `
-  --input ".private/certificates/Laravel-certificate.jpg" `
-  --output "public/images/certificates/laravel-workshop-v2.webp" `
-  --box 366 730 438 820 `
-  --box 812 744 878 822
+  --recipe scripts/certificate-recipes.json `
+  --entry laravel-workshop `
+  --output public/images/certificates/laravel-workshop-v3.webp
 ```
 
-The script refuses to overwrite an existing preview. When adjusting a result,
-use a new name such as `laravel-workshop-v2.webp`, or deliberately add
-`--overwrite` to replace the processed preview. The original is never overwritten.
+To regenerate all five configured previews after reviewing every recipe:
 
-For every rectangle, the script crops that area, reduces it to a 4-by-2-pixel
-color grid to remove fine pen strokes, enlarges it again, and smooths it with
-Gaussian blur. It pastes the blurred area back into a copy of the certificate.
-It checks that pixels outside the rectangles are unchanged before resizing.
-Finally, it exports a flattened WebP with no original EXIF metadata.
-
-The default maximum edge is 1263 pixels, without stretching or cropping the
-certificate. The command prints the actual output width and height.
-
-## 4. Check it and update the website
-
-Open the exported WebP and zoom in on **every** signature. If any stroke is
-visible, expand its box and regenerate the preview. Check that the title,
-recipient, and workshop details remain readable.
-
-In `src/data/certifications.js`, set the certificate's image path to the new
-WebP and use the dimensions printed by the script. For the `v2` example above:
-
-```javascript
-image: '/images/certificates/laravel-workshop-v2.webp',
-width: 1263,
-height: 976,
+```powershell
+python scripts/blur_certificate.py --recipe scripts/certificate-recipes.json --all --overwrite
 ```
 
-Run `npm.cmd run build`, then check the certificate in the portfolio. Commit
-the processed WebP and data change, keeping the original outside `public/`.
-CSS blur alone does not protect a signature: the browser would still receive
-the unblurred file. Removing a previously committed original from the latest
-website does not erase old Git commits or previous deployments.
+The script normally refuses to overwrite outputs. Use a new versioned filename
+while experimenting. `--overwrite` deliberately replaces processed files,
+never an original.
+
+## Read and edit a recipe
+
+Each certificate entry specifies its private input, public output, and these
+optional operations:
+
+| Field | Purpose |
+| --- | --- |
+| `polygons` | Ordered `[x, y]` points tracing a blur area. |
+| `boxes` | Simple `[left, top, right, bottom]` blur rectangles. |
+| `protect_boxes` | Preserve original pixels in text areas that contain no signature ink. |
+| `restore_text` | Recreate verified text where handwriting crosses a scanned name. |
+| `restore_patches` | Copy exact lettering and background from a private clean-layer reference. |
+
+The top-left corner is `(0, 0)`. X increases rightward and Y increases downward.
+The script applies EXIF rotation first, so coordinates match the displayed
+orientation. Coordinates refer to the full-size original, before export resizing.
+
+For each `restore_text` item:
+
+- `text` is the exact wording checked against the original.
+- `font` is an installed font filename or path. The current Windows recipes
+  use `ariblk.ttf` and `timesbd.ttf`; other computers may need equivalent fonts.
+- `box` is the affected name band whose old overlapping ink must be cleared.
+- `background_box` samples a clean nearby part of the same background.
+  Check that it contains no letters or handwriting, or those marks will be copied.
+- `ink_box` positions the recreated lettering inside `box`.
+- `color` matches the original printed text.
+
+Only recreate text after verifying it. Keep titles and surrounding content
+unchanged unless they also overlap handwriting. For PDFs with separate layers,
+prefer `restore_patches` so the exact original lettering can be preserved.
+
+## Use a private coordinate guide
+
+This command shows the Laravel masks and also regenerates its configured preview:
+
+```powershell
+python scripts/blur_certificate.py `
+  --recipe scripts/certificate-recipes.json `
+  --entry laravel-workshop `
+  --guide .private/certificate-guides/laravel-name-preservation.png `
+  --overwrite
+```
+
+Guide colors are red for the coordinate grid, yellow for blur shapes, green for
+protected text, and blue for restoration areas. Open the guide in Paint or an
+image viewer; Paint's cursor coordinates help refine the points.
+
+For a new original with no recipe yet, generate only a coordinate grid:
+
+```powershell
+python scripts/blur_certificate.py --input ".private/certificates/new-certificate.jpg" --guide ".private/certificate-guides/new-grid.png"
+```
+
+Inspect all handwriting, including tails and digital-signature marks. A small
+unblurred stroke can remain outside a mask. Do not extend a blur across a printed
+name without adding a verified restoration instruction.
+
+## How the conference certificate keeps its exact text
+
+Its PDF has separate signature images and printed text. A clean reference was
+rendered in memory with just the three signature images omitted. The source PDF
+was not saved or changed. The resulting private reference is:
+
+`.private/certificate-renders/conference-without-signature-images.png`
+
+The recipe copies only the affected name/title bands from that reference after
+blurring the handwriting above them. Back up this reference with your private
+originals; it is not committed or uploaded.
+
+If you need to regenerate that reference, install PyMuPDF locally:
+
+```powershell
+python -m pip install PyMuPDF
+```
+
+For this exact PDF only, its verified signature-image IDs are 47, 48, and 49:
+
+```powershell
+@'
+import pymupdf
+
+document = pymupdf.open(".private/certificates/John-Raymart-Montinola-Tenio.pdf")
+page = document[0]
+for image_id in [47, 48, 49]:
+    page.delete_image(image_id)
+page.get_pixmap(matrix=pymupdf.Matrix(1.5, 1.5), alpha=False).save(
+    ".private/certificate-renders/conference-without-signature-images.png"
+)
+'@ | python -
+```
+
+Image IDs are specific to that PDF: do not reuse them for another certificate.
+Other PDF entries use private page renders in `.private/certificate-renders/`.
+
+## Verify before publishing
+
+1. Open the new WebP and zoom in. Confirm every name, title, accent, and
+   qualification remains readable and matches the original.
+2. Check every signature for uncovered strokes, including where it crossed text.
+3. Confirm the title, recipient, dates, and certificate body are unchanged.
+4. Update `image`, `width`, and `height` in `src/data/certifications.js`.
+   The script prints the actual dimensions; it never stretches the document.
+5. Run the checks below, then inspect the certificate in the portfolio.
+
+```powershell
+python -m unittest discover -s tests -p "test_blur_certificate.py"
+npm.cmd run build
+```
+
+The script checks that changes are confined to approved masks and restoration
+areas before resizing and export, then saves fresh pixels without EXIF thumbnails.
+The tests cover preserved name pixels, exact clean-layer patches, recreated text,
+orientation, metadata removal, private guides, and overwrite protection.
+
+Keep originals and guides outside `public/`. CSS blur alone leaves the unblurred
+file accessible. Removing a previously committed original from the latest site
+does not erase old Git commits or past deployments.

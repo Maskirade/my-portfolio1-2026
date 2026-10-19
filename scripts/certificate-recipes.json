@@ -1,0 +1,209 @@
+{
+  "certificates": {
+    "area51-internship": {
+      "input": ".private/certificates/Certificate of Internship TENIO (1).jpg",
+      "output": "public/images/certificates/area51-internship-v2.webp",
+      "polygons": [
+        [
+          [1600, 1980],
+          [1735, 1980],
+          [1750, 2030],
+          [1860, 2008],
+          [1915, 2055],
+          [1920, 2090],
+          [1770, 2120],
+          [1715, 2140],
+          [1710, 2167],
+          [1620, 2167],
+          [1615, 2120],
+          [1580, 2100],
+          [1580, 2040]
+        ]
+      ],
+      "protect_boxes": [
+        [1440, 2167, 2070, 2180]
+      ],
+      "restore_text": [
+        {
+          "text": "CLOYD CUNANAN",
+          "font": "ariblk.ttf",
+          "color": "#000000",
+          "box": [1465, 2090, 2038, 2150],
+          "background_box": [1465, 1950, 2038, 1980],
+          "ink_box": [1476, 2096, 2026, 2142]
+        }
+      ]
+    },
+    "dict-iot-smart-cities": {
+      "input": ".private/certificate-renders/pdf-2-page-1.png",
+      "output": "public/images/certificates/dict-iot-smart-cities-v2.webp",
+      "polygons": [
+        [
+          [532, 724],
+          [555, 691],
+          [579, 684],
+          [598, 690],
+          [603, 704],
+          [625, 709],
+          [646, 707],
+          [650, 688],
+          [667, 685],
+          [679, 698],
+          [685, 724],
+          [672, 736],
+          [613, 737],
+          [566, 748],
+          [566, 732],
+          [572, 733],
+          [536, 734]
+        ],
+        [
+          [761, 801],
+          [774, 798],
+          [785, 799],
+          [785, 809],
+          [761, 810]
+        ]
+      ],
+      "protect_boxes": [
+        [510, 748, 752, 779],
+        [520, 780, 760, 798]
+      ]
+    },
+    "pakiglambigit2025": {
+      "input": ".private/certificate-renders/pdf-3-page-1.png",
+      "output": "public/images/certificates/pakiglambigit2025-v2.webp",
+      "polygons": [
+        [
+          [183, 724],
+          [223, 720],
+          [228, 748],
+          [240, 760],
+          [238, 773],
+          [176, 773]
+        ],
+        [
+          [532, 765],
+          [553, 748],
+          [579, 748],
+          [582, 776],
+          [613, 775],
+          [645, 758],
+          [657, 772],
+          [608, 823],
+          [536, 823]
+        ],
+        [
+          [817, 743],
+          [886, 735],
+          [890, 721],
+          [902, 724],
+          [910, 744],
+          [967, 742],
+          [969, 753],
+          [926, 790],
+          [850, 818],
+          [839, 794],
+          [860, 769],
+          [808, 765]
+        ]
+      ],
+      "restore_patches": [
+        {
+          "box": [85, 768, 336, 821],
+          "reference": ".private/certificate-renders/conference-without-signature-images.png"
+        },
+        {
+          "box": [395, 811, 740, 863],
+          "reference": ".private/certificate-renders/conference-without-signature-images.png"
+        },
+        {
+          "box": [803, 763, 1005, 824],
+          "reference": ".private/certificate-renders/conference-without-signature-images.png"
+        }
+      ]
+    },
+    "area51-summer-webinar": {
+      "input": ".private/certificate-renders/pdf-1-page-1.png",
+      "output": "public/images/certificates/area51-summer-webinar-v2.webp",
+      "polygons": [
+        [
+          [579, 714],
+          [588, 699],
+          [613, 691],
+          [626, 698],
+          [635, 721],
+          [665, 713],
+          [674, 697],
+          [693, 722],
+          [692, 733],
+          [632, 759],
+          [596, 759],
+          [598, 757],
+          [588, 741],
+          [579, 728]
+        ]
+      ],
+      "protect_boxes": [
+        [516, 759, 747, 764]
+      ],
+      "restore_text": [
+        {
+          "text": "Cloyd Cunanan",
+          "font": "timesbd.ttf",
+          "color": "#f2f2f6",
+          "box": [551, 729, 712, 754],
+          "background_box": [551, 663, 712, 688],
+          "ink_box": [555, 731, 708, 749]
+        }
+      ]
+    },
+    "laravel-workshop": {
+      "input": ".private/certificates/Laravel-certificate.jpg",
+      "output": "public/images/certificates/laravel-workshop-v2.webp",
+      "polygons": [
+        [
+          [373, 769],
+          [389, 746],
+          [411, 735],
+          [427, 741],
+          [431, 773],
+          [422, 815],
+          [399, 816],
+          [391, 797],
+          [372, 789]
+        ],
+        [
+          [819, 763],
+          [827, 747],
+          [842, 750],
+          [845, 763],
+          [868, 764],
+          [870, 784],
+          [850, 795],
+          [849, 815],
+          [827, 815],
+          [820, 790]
+        ]
+      ],
+      "restore_text": [
+        {
+          "text": "CHRISTINE M. PITOS. MSC",
+          "font": "timesbd.ttf",
+          "color": "#111111",
+          "box": [238, 785, 590, 816],
+          "background_box": [238, 718, 590, 730],
+          "ink_box": [244, 789, 584, 811]
+        },
+        {
+          "text": "CATHERINE F. SALOMON. PHD(C)",
+          "font": "timesbd.ttf",
+          "color": "#111111",
+          "box": [670, 781, 1100, 820],
+          "background_box": [670, 718, 1100, 730],
+          "ink_box": [676, 788, 1094, 813]
+        }
+      ]
+    }
+  }
+}

@@ -1,6 +1,7 @@
 .git
 .vercel
 .private/
+__pycache__/
 node_modules
 dist
 .env

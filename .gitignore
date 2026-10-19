@@ -7,3 +7,4 @@ dist
 !.env.example
 .vercel
 .private/
+__pycache__/
