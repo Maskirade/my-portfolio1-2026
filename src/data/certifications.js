@@ -48,4 +48,16 @@ export const certifications = [
     width: 1263,
     height: 893,
   },
+  {
+    id:'nemsu-2days-laravel',
+    name:'Web Development Essentials with Laravel',
+    issuer:'NEMSU Lianga Campus',
+    category:'Hands-on Workshop',
+    date:'May 23-24, 2025',
+    dateTime:'2025-05-23',
+    description:'Two-day hands-on workshop on web development with Laravel.',
+    image:'/images/certificates/laravel-workshop-v1.webp',
+    width: 1263,
+    height: 976,
+  },
 ];
