@@ -3,7 +3,7 @@ export const profile = {
   name: 'John Raymart Tenio',
   role: 'Full-Stack Developer',
   tagline: 'Web · Mobile · AI Integration',
-  bio: "I'm a full-stack developer. I build useful web & mobile apps, and right now I'm focusing on AI integration development. I'm learning new skills and building new things that could actually help people.",
+  bio: "I'm a full-stack software and web developer with a passion for building web and mobile applications. I have experience in both front-end and back-end development, and I'm currently focused on integrating AI into my projects. I enjoy learning new technologies and applying them to create practical solutions.",
   shortBio:
     "Full-stack developer building web and mobile apps, currently focused on AI integration.",
   location: 'San Jose, Prosperidad, Agusan del Sur, Philippines',
