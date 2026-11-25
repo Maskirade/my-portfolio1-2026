@@ -34,6 +34,15 @@ export const profile = {
       initials: 'DW',
       logo: null, // Optional local logo path, for example /images/affiliations/studio.webp.
     },
+    {
+      id: 'liavanta-technologies',
+      name: 'LIAVANTA Technologies',
+      role: 'CO-FOUNDER',
+      description: "I'm a co-founder of LIAVANTA Technologies.",
+      url: 'https://liavanta-technologies.vercel.app/',
+      initials: 'LT',
+      logo: null,
+    },
   ],
   focus: [
     {
