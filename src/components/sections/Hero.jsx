@@ -96,6 +96,23 @@ export default function Hero() {
             <FileText size={16} /> View Resume
           </Link>
         </div>
+
+        <dl
+          aria-label="Portfolio at a glance"
+          className="mt-10 grid grid-cols-1 divide-y divide-line border-y border-line min-[400px]:grid-cols-3 min-[400px]:divide-x min-[400px]:divide-y-0"
+        >
+          {profile.heroStats.map(({ value, label }) => (
+            <div
+              key={label}
+              className="flex min-w-0 flex-col gap-2 py-5 min-[400px]:px-3 min-[400px]:first:pl-0 min-[400px]:last:pr-0 sm:px-5 sm:py-6 sm:first:pl-0 sm:last:pr-0"
+            >
+              <dt className="font-mono text-xs text-ink-muted">{label}</dt>
+              <dd className="order-first font-display text-3xl font-semibold leading-none tracking-tight text-ink tabular-nums sm:text-4xl">
+                {value}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </section>
   );
