@@ -14,9 +14,9 @@ const featureStates = {
 const pageSections = [
   ['overview', 'Overview'],
   ['problem', 'The problem'],
+  ['solution', 'The solution'],
   ['contribution', 'My contribution'],
   ['features', 'Key features'],
-  ['solution', 'The solution'],
   ['technology', 'Technology choices'],
   ['challenges', 'Challenges and lessons'],
   ['status', 'Current status'],
@@ -111,6 +111,7 @@ export default function ProjectDetail() {
           <div className="min-w-0 max-w-3xl space-y-12 xl:order-1">
             <StorySection id="overview" title="Overview"><p>{details.overview}</p></StorySection>
             <StorySection id="problem" title="The problem"><p>{details.problem}</p></StorySection>
+            <StorySection id="solution" title="The solution"><p>{details.solution}</p></StorySection>
             <StorySection id="contribution" title="My contribution"><p>{details.contribution}</p></StorySection>
 
             <StorySection id="features" title="Key features">
@@ -133,8 +134,6 @@ export default function ProjectDetail() {
                 })}
               </ul>
             </StorySection>
-
-            <StorySection id="solution" title="The solution"><p>{details.solution}</p></StorySection>
 
             <StorySection id="technology" title="Technology choices">
               <dl className="divide-y divide-line">
