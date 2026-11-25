@@ -19,7 +19,7 @@ export const profile = {
   roles: ['Web Developer', 'Mobile App Developer', 'AI/ML Developer'],
   heroStats: [
     { value: '4+', label: 'Projects' },
-    { value: '28', label: 'Technologies' },
+    { value: '25+', label: 'Technologies' },
     { value: '1+', label: 'Experience' },
   ],
   // Add entries here to update both the homepage preview and Affiliations page.
