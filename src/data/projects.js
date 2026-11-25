@@ -1,10 +1,12 @@
-// PLACEHOLDER DATA — replace with real projects.
+// Card summaries and full project stories share one source of truth.
+// Feature states: implemented, in-development, or planned. Update as work ships.
 export const projects = [
   {
     id: 'project-one',
+    slug: 'civicprep',
     title: 'CivicPrep',
     description:
-      'A gamified mobile application that helps users prepare for the Civil Service Exam while enjoying the process of learning. I also integrated a smart topics scheduler that adapts to the user\'s learning pace and performance, ensuring a personalized learning experience. The reason why integrated a smart topics scheduler is to help users manage their study time effectively, allowing them to focus on areas where they need improvement.',
+      'A Civil Service Exam review app with gamified practice, adaptive topic scheduling, and locally stored learning progress.',
     technologies: ['Flutter', 'Dart', 'ObjectBox'],
     category: 'Mobile App',
     image: '/images/projects/civicprep.png',
@@ -12,9 +14,34 @@ export const projects = [
     liveUrl: '#',
     status: 'Completed',
     featured: true,
+    role: 'Full-stack developer · thesis project',
+    details: {
+      overview: 'CivicPrep is a mobile review companion for people preparing for the Philippine Civil Service Exam. I built it for our thesis project, bringing exam practice, study planning, and persistent progress into one application.',
+      problem: 'Exam preparation requires learners to stay motivated and decide how to divide their study time. Reviewing every topic the same way can leave less time for areas that need more attention. I wanted the app to make practice engaging and give learners a clearer direction for their next study session.',
+      contribution: 'I developed the application with Flutter and Dart, incorporated game mechanics, integrated the smart topic scheduler, and implemented ObjectBox storage for progress and preferences. This connected the interface, learning behavior, and local data layer in one project.',
+      features: [
+        { title: 'Gamified exam review', description: 'Game mechanics make Civil Service Exam practice more engaging and encourage learners to return to their review.', state: 'implemented' },
+        { title: 'Adaptive topic scheduling', description: 'The scheduler responds to learning pace and performance to help learners focus on topics where they need improvement.', state: 'implemented' },
+        { title: 'Saved learning progress', description: 'Progress and preferences persist locally through ObjectBox, so learners can return to the information they saved.', state: 'implemented' },
+        { title: 'Offline access to stored data', description: 'Locally stored progress and preferences remain accessible without depending on an online database connection.', state: 'implemented' },
+      ],
+      solution: 'The application connects practice with a next step: use learning progress to guide topic scheduling, keep review engaging through game mechanics, and store the information a learner needs between sessions. Each part supports continuity rather than treating every visit as a fresh start.',
+      technologyNotes: [
+        { name: 'Flutter', description: 'Builds the mobile interface and reusable screens for the review experience.' },
+        { name: 'Dart', description: 'Expresses the application logic that connects practice, scheduling, and saved progress.' },
+        { name: 'ObjectBox', description: 'Stores user progress and preferences on the device for persistence and offline access.' },
+      ],
+      challenges: [
+        { title: 'Keeping engagement tied to learning', description: 'Gamification needs to support exam preparation. This project taught me to evaluate a feature by the learning behavior it encourages, such as returning to practice.' },
+        { title: 'Connecting progress to the next topic', description: 'The scheduler brought together performance and study planning. Building it gave me practice thinking through how an application can respond to an individual learner.' },
+        { title: 'Treating persistence as part of the experience', description: 'Implementing local storage strengthened my understanding of how mobile screens and database state work together when someone returns to an app.' },
+      ],
+      currentStatus: 'Completed as a thesis project and presented to our panel. The panel responded positively to its exam-preparation approach and interface.',
+    },
   },
   {
     id: 'project-two',
+    slug: 'nemsu-library-attendance',
     title: 'NEMSU-LC Library Attendance System',
     description:
       'A library attendance system with barcode scanner for seamless attendance in and out. The system also integrated with ID generator for quick ID creation.',
@@ -25,9 +52,34 @@ export const projects = [
     liveUrl: '#',
     status: 'Completed',
     featured: true,
+    role: 'Web developer',
+    details: {
+      overview: 'A web application for the NEMSU-LC library that brings attendance recording and ID creation into the same workflow. It uses barcode scanning for library check-ins and check-outs.',
+      problem: 'Recording a library visit involves identifying the visitor and recording whether they are entering or leaving. ID creation is closely related to that process. The project brings those tasks together so attendance can follow a clear scanning workflow.',
+      contribution: 'I built the web application and integrated barcode attendance in and out with an ID generator. The work covered the interface, supporting application logic, and database. This is a separate project from the RFID attendance page I contributed during my Area 51 placement.',
+      features: [
+        { title: 'Barcode check-in', description: 'A barcode scanner supports recording attendance when someone enters the library.', state: 'implemented' },
+        { title: 'Barcode check-out', description: 'The attendance workflow also records when a visitor leaves the library.', state: 'implemented' },
+        { title: 'Integrated ID generator', description: 'Library IDs can be created within the application, connecting ID creation with the attendance process.', state: 'implemented' },
+      ],
+      solution: 'The system organizes attendance around an everyday action: scan an ID when entering or leaving. Integrating ID creation keeps a related task in the same application and gives the project a focused purpose beyond displaying records.',
+      technologyNotes: [
+        { name: 'HTML', description: 'Provides the structure for the attendance and ID-generation pages.' },
+        { name: 'PHP', description: 'Handles the server-side application logic behind the web workflow.' },
+        { name: 'Tailwind CSS', description: 'Styles the interface and its responsive layouts.' },
+        { name: 'MySQL', description: 'Provides relational storage for the application’s attendance and identity data.' },
+        { name: 'JavaScript', description: 'Supports interactions in the browser as part of the attendance interface.' },
+      ],
+      challenges: [
+        { title: 'Designing around a physical action', description: 'The scanning workflow kept the purpose of the interface concrete: identify a visitor and record an entry or exit. It helped me connect interface decisions to a task outside the screen.' },
+        { title: 'Connecting related workflows', description: 'Bringing an ID generator into the attendance application encouraged me to think about how adjacent tasks can fit together instead of building isolated pages.' },
+      ],
+      currentStatus: 'Completed. The documented scope includes barcode attendance in and out and integrated ID generation.',
+    },
   },
   {
     id: 'project-three',
+    slug: 'ezqueue',
     title: 'EzQueue',
     description:
       'EzQueue is an application built for seamless booking with our fellow barber shops and salons within Philippines.',
@@ -38,9 +90,34 @@ export const projects = [
     liveUrl: '#',
     status: 'In Progress',
     featured: true,
+    role: 'Mobile application developer · ongoing project',
+    details: {
+      overview: 'EzQueue is an ongoing mobile project for booking with barbershops and salons in the Philippines. It applies my mobile-development experience to a service-booking workflow.',
+      problem: 'A booking needs to connect a customer’s intended visit with a shop’s time. The project focuses on making that interaction easier to follow, with a clear path from choosing a provider to arranging a visit.',
+      contribution: 'My focus is developing the mobile booking experience with Flutter and Dart and working with Supabase and PostgreSQL as its backend stack. The project is still taking shape; the features below describe its intended scope rather than a completed release.',
+      features: [
+        { title: 'Barbershop and salon booking', description: 'The core goal is to let customers arrange visits with barbershops and salons through a mobile application.', state: 'planned' },
+        { title: 'Clear booking details', description: 'The intended flow makes the details of a planned visit understandable before a customer commits to it.', state: 'planned' },
+        { title: 'Connected booking data', description: 'The selected backend stack is intended to support storing and retrieving the information used by the booking flow.', state: 'planned' },
+      ],
+      solution: 'The direction is a focused mobile booking journey supported by a connected backend. Keeping the next action clear is the central design goal as the application develops.',
+      technologyNotes: [
+        { name: 'Flutter', description: 'Selected for building the mobile booking interface and reusable screens.' },
+        { name: 'Dart', description: 'Used for mobile application logic and connecting the screens to data.' },
+        { name: 'PostgreSQL', description: 'The relational database selected for the booking domain through Supabase.' },
+        { name: 'Supabase', description: 'The selected backend platform for connecting the mobile application to PostgreSQL data.' },
+      ],
+      challengeHeading: 'Challenges and learning goals',
+      challenges: [
+        { title: 'Making the next step understandable', description: 'A booking flow needs to communicate what a customer is arranging and what happens next. This is a design priority for the ongoing work.' },
+        { title: 'Moving from local to connected data', description: 'Compared with CivicPrep’s local progress storage, EzQueue gives me a different context for connecting a mobile interface with a backend.' },
+      ],
+      currentStatus: 'In progress. The feature list records the project’s intended scope; implementation and release milestones are not yet documented here. Features will be marked as implemented as their delivery is confirmed.',
+    },
   },
   {
     id: 'project-four',
+    slug: 'boardmate',
     title: 'BoardMate',
     description: 'Boarding house management system that helps boarding house owners manage their boarders, secured online payments.',
     technologies: ['Laravel', 'MySQL', 'Tailwind CSS', 'React.js'],
@@ -50,5 +127,28 @@ export const projects = [
     liveUrl: '#',
     status: 'In Progress',
     featured: false,
+    role: 'Web application developer · ongoing project',
+    details: {
+      overview: 'BoardMate is an ongoing boarding-house management project for owners who need to manage their boarders and payment-related work through a web application.',
+      problem: 'Managing a boarding house involves keeping track of people as well as payments. BoardMate brings those responsibilities into one project, with the goal of making the owner’s day-to-day work easier to organize.',
+      contribution: 'My current focus is building the management application with Laravel, React, MySQL, and Tailwind CSS. Boarder management and online payments are the planned scope. The portfolio does not yet document a completed payment integration.',
+      features: [
+        { title: 'Boarder management', description: 'The application is intended to give owners a central place to manage their boarders.', state: 'planned' },
+        { title: 'Online payments', description: 'Online payment support is part of the intended scope. A payment provider and completed integration are not yet documented.', state: 'planned' },
+      ],
+      solution: 'The proposed solution combines boarder management and payment-related workflows in a single web application. The selected stack separates an interactive frontend from backend logic and relational data storage.',
+      technologyNotes: [
+        { name: 'Laravel', description: 'Selected to structure the backend application and its management workflows.' },
+        { name: 'MySQL', description: 'Selected as the relational database for the management application.' },
+        { name: 'Tailwind CSS', description: 'Used to style the management interface and adapt its layout to different screens.' },
+        { name: 'React.js', description: 'Selected for building the interactive frontend of the web application.' },
+      ],
+      challengeHeading: 'Challenges and learning goals',
+      challenges: [
+        { title: 'Keeping owner workflows connected', description: 'The design needs to relate boarder management to the payment work around it. That connection is a focus for the ongoing development.' },
+        { title: 'Defining the payment boundary', description: 'Online payments need a clearly scoped integration and verification before they can be presented as delivered. This remains part of the project’s planned work.' },
+      ],
+      currentStatus: 'In progress. Boarder management and online payments describe the intended product direction. Completed functionality and payment-integration details will be added when confirmed.',
+    },
   },
 ];

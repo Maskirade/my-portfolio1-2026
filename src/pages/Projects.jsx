@@ -50,9 +50,9 @@ export default function Projects() {
         </div>
       </Reveal>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid sm:grid-cols-2 2xl:grid-cols-3 gap-6">
         {filtered.map((project, i) => (
-          <Reveal key={project.id} delay={i * 70}>
+          <Reveal key={project.id} delay={i * 70} className="h-full">
             <ProjectCard project={project} />
           </Reveal>
         ))}

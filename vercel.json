@@ -12,6 +12,7 @@
   },
   "rewrites": [
     { "source": "/projects", "destination": "/index.html" },
+    { "source": "/projects/:path*", "destination": "/index.html" },
     { "source": "/experience", "destination": "/index.html" },
     { "source": "/affiliations", "destination": "/index.html" },
     { "source": "/resume", "destination": "/index.html" },
