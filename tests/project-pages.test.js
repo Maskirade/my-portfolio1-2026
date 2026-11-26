@@ -13,6 +13,7 @@ import { gear } from '../src/data/gear.js';
 import { recommendations } from '../src/data/recommendations.js';
 import { techStack } from '../src/data/techStack.js';
 import { profile } from '../src/data/profile.js';
+import { workflowStages, developmentPrinciples, processCaseStudy } from '../src/data/howIWork.js';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 let workspace;
@@ -35,6 +36,8 @@ before(async () => {
     "export { default as Gear } from '../../src/pages/Gear.jsx';",
     "export { default as Recommendations } from '../../src/pages/Recommendations.jsx';",
     "export { default as Resume } from '../../src/pages/Resume.jsx';",
+    "export { default as HowIWork } from '../../src/pages/HowIWork.jsx';",
+    "export { default as MobileNav } from '../../src/components/layout/MobileNav.jsx';",
   ].join('\n'));
   const result = await build({
     input: entry,
@@ -218,4 +221,65 @@ test('new collection pages support direct Vercel requests and primary navigation
     assert.ok(app.includes(`<Route path="${path}"`));
     assert.ok(sidebar.includes(`href="${path}"`));
   }
+});
+
+test('How I Work exposes the complete process with native activity disclosures and a real case study', () => {
+  const html = render(components.HowIWork, {}, '/how-i-work');
+  const text = (value) => value.replaceAll('&', '&amp;').replaceAll("'", '&#x27;');
+  assert.match(html, /<h1[^>]*>How I Work<\/h1>/);
+  assert.equal(workflowStages.length, 6);
+  assert.equal(new Set(workflowStages.map((stage) => stage.id)).size, 6);
+  for (const stage of workflowStages) {
+    assert.ok(html.includes(`id="${stage.id}-title"`));
+    assert.ok(html.includes(text(stage.description)));
+    assert.ok(html.includes(text(stage.output)));
+    for (const activity of stage.activities) assert.ok(html.includes(text(activity)));
+  }
+  assert.equal((html.match(/<details /g) || []).length, 7);
+  assert.equal((html.match(/<summary /g) || []).length, 7);
+  assert.doesNotMatch(html, /<details[^>]*\bopen=""/);
+  assert.equal(developmentPrinciples.length, 6);
+  for (const principle of developmentPrinciples) assert.ok(html.includes(text(principle.title)));
+  const project = projects.find((item) => item.slug === processCaseStudy.projectSlug);
+  assert.ok(project, 'Case study must reference an existing project');
+  assert.ok(html.includes(`src="${project.image}"`));
+  assert.ok(html.includes(`href="/projects/${project.slug}"`));
+  for (const part of processCaseStudy.narrative) assert.ok(html.includes(text(part.description)));
+  assert.ok(html.includes('href="/#how-i-work"'));
+  assert.ok(html.includes('href="/#contact"'));
+  assert.ok(html.includes('href="/projects"'));
+  assert.ok(!html.includes('href="#"'));
+  const home = render(components.Home, {}, '/');
+  assert.ok(home.includes('id="contact"'));
+  const preview = home.match(/<section id="how-i-work"[\s\S]*?<\/section>/)?.[0];
+  assert.ok(preview, 'Homepage has a process preview');
+  assert.ok(preview.includes('href="/how-i-work"'));
+  assert.ok(home.indexOf('id="about"') < home.indexOf('id="how-i-work"'));
+  assert.ok(home.indexOf('id="how-i-work"') < home.indexOf('id="blog"'));
+  assert.deepEqual([...home.matchAll(/SECTION (\d{2})/g)].map((match) => match[1]),
+    Array.from({ length: 11 }, (_, index) => String(index + 1).padStart(2, '0')));
+  for (const stage of workflowStages) {
+    assert.ok(preview.includes(text(stage.title)));
+    assert.ok(!preview.includes(text(stage.description)));
+    assert.ok(!preview.includes(text(stage.output)));
+  }
+  assert.ok(!preview.includes('<details'));
+  assert.ok(!home.includes('From discovery to delivery'), 'Keep the full workflow off the homepage');
+});
+
+test('How I Work is active in both menus and supports direct Vercel requests', async () => {
+  const path = '/how-i-work';
+  const sidebar = render(components.Sidebar, { theme: 'dark', onToggleTheme() {} }, path);
+  const mobile = render(components.MobileNav, { open: true, onClose() {} }, path);
+  for (const html of [sidebar, mobile]) {
+    const link = [...html.matchAll(/<a\b[^>]*>[\s\S]*?<\/a>/g)].find(([tag]) => tag.includes(`href="${path}"`))?.[0];
+    assert.ok(link?.includes('aria-current="page"'));
+    assert.ok(link.includes('How I Work'));
+    assert.ok(html.includes('href="/certifications"'));
+    assert.ok(html.includes('href="/recommendations"'));
+  }
+  const config = JSON.parse(await readFile(join(root, 'vercel.json'), 'utf8'));
+  assert.ok(config.rewrites.some((rewrite) => rewrite.source === path && rewrite.destination === '/index.html'));
+  const app = await readFile(join(root, 'src/App.jsx'), 'utf8');
+  assert.ok(app.includes(`<Route path="${path}"`));
 });

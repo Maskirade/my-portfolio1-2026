@@ -5,7 +5,7 @@ import { gear } from '../../data/gear.js';
 export default function Gear() {
   const primary = gear[0];
   return (
-    <HomeSection id="gear" index="03" label="Loadout" title="Gear" to="/gear" linkLabel="View full setup">
+    <HomeSection id="gear" index="04" label="Loadout" title="Gear" to="/gear" linkLabel="View full setup">
       {primary && (
         <Link to={`/gear#${primary.id}`} className="group flex flex-col items-start gap-5 rounded-sm sm:flex-row sm:items-center sm:gap-8">
           {primary.image && <img src={primary.image} alt={primary.title} className="h-32 w-full object-contain sm:w-48" loading="lazy" />}

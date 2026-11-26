@@ -4,7 +4,7 @@ import { certifications } from '../../data/certifications.js';
 
 export default function Certifications() {
   return (
-    <HomeSection id="certifications" index="07" label="Credentials" title="Certifications" to="/certifications" linkLabel={`View all ${certifications.length} certificates`}>
+    <HomeSection id="certifications" index="08" label="Credentials" title="Certifications" to="/certifications" linkLabel={`View all ${certifications.length} certificates`}>
       <ul className="divide-y divide-line">
         {certifications.slice(0, 2).map((cert) => (
           <li key={cert.id}>

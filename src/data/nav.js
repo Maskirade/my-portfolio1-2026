@@ -2,6 +2,7 @@ export const navItems = [
   { label: 'Blog', path: '/blog', sectionId: 'blog' },
   { label: 'Gear', path: '/gear', sectionId: 'gear' },
   { label: 'Projects', path: '/projects', sectionId: 'projects' },
+  { label: 'How I Work', path: '/how-i-work' },
   { label: 'Experience', path: '/experience', sectionId: 'experience' },
   { label: 'Certifications', path: '/certifications', sectionId: 'certifications' },
   { label: 'Recommendations', path: '/recommendations', sectionId: 'recommendations' },

@@ -1,5 +1,6 @@
 import Hero from '../components/sections/Hero.jsx';
 import About from '../components/sections/About.jsx';
+import HowIWorkPreview from '../components/sections/HowIWorkPreview.jsx';
 import BlogPreview from '../components/sections/BlogPreview.jsx';
 import Gear from '../components/sections/Gear.jsx';
 import Projects from '../components/sections/Projects.jsx';
@@ -16,6 +17,7 @@ export default function Home() {
     <>
       <Hero />
       <About />
+      <HowIWorkPreview />
       <BlogPreview />
       <Gear />
       <Projects />

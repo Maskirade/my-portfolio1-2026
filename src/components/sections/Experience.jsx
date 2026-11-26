@@ -5,7 +5,7 @@ export default function Experience() {
   // The shared timeline runs from earliest to current; preview the latest entry.
   const latest = experience.at(-1);
   return (
-    <HomeSection id="experience" index="05" label="Timeline" title="Experience" to="/experience" linkLabel="Full timeline">
+    <HomeSection id="experience" index="06" label="Timeline" title="Experience" to="/experience" linkLabel="Full timeline">
       {latest && (
         <article className="max-w-2xl border-l-2 border-accent pl-5">
           <p className="font-mono text-xs text-accent">{latest.date}</p>

@@ -4,7 +4,7 @@ import { blogPosts } from '../../data/blog.js';
 
 export default function BlogPreview() {
   return (
-    <HomeSection id="blog" index="02" label="Writing" title="From the blog" to="/blog" linkLabel="All articles">
+    <HomeSection id="blog" index="03" label="Writing" title="From the blog" to="/blog" linkLabel="All articles">
       <ul className="divide-y divide-line">
         {blogPosts.slice(0, 2).map((post) => (
           <li key={post.id}>

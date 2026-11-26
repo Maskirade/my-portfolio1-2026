@@ -61,7 +61,7 @@ export default function GithubActivity() {
   const rows = { gridTemplateRows: 'repeat(7, 10px)' };
 
   return (
-    <HomeSection id="github" index="10" label="Activity" title="GitHub contributions">
+    <HomeSection id="github" index="11" label="Activity" title="GitHub contributions">
       <Panel className="p-4 sm:p-6 rounded-sm min-w-0" aria-busy={loading}>
         <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
           <div role="status" aria-live="polite" aria-atomic="true">

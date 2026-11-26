@@ -7,7 +7,7 @@ export default function Affiliation() {
   const affiliations = profile.affiliations || [];
   if (!affiliations.length) return null;
   return (
-    <HomeSection id="affiliation" index="09" label="Connections" title="Affiliations" to="/affiliations" linkLabel="All affiliations">
+    <HomeSection id="affiliation" index="10" label="Connections" title="Affiliations" to="/affiliations" linkLabel="All affiliations">
       <ul className="flex flex-wrap gap-x-8 gap-y-5">
         {affiliations.slice(0, 3).map((affiliation) => (
           <li key={affiliation.id} className="max-w-full">

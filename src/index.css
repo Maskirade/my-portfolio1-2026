@@ -2,6 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
+.process-intro-grid {
+  background-image: linear-gradient(var(--color-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at 85% 20%, black, transparent 75%);
+  opacity: 0.45;
+}
+
+.workflow-details > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Native disclosures remain usable when intrinsic-size transitions are unsupported. */
+@supports (interpolate-size: allow-keywords) {
+  .workflow-details {
+    interpolate-size: allow-keywords;
+  }
+
+  .workflow-details::details-content {
+    height: 0;
+    opacity: 0;
+    overflow: clip;
+    transition: height 220ms ease, opacity 220ms ease, content-visibility 220ms;
+    transition-behavior: allow-discrete;
+  }
+
+  .workflow-details[open]::details-content {
+    height: auto;
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .workflow-details::details-content {
+    transition: none;
+  }
+}
+
 @media print {
   .certificate-preview-image {
     display: none !important;
