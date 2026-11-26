@@ -1,37 +1,20 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
-import Reveal from '../effects/Reveal.jsx';
-import SectionHeader from '../ui/SectionHeader.jsx';
-import BlogCard from '../ui/BlogCard.jsx';
+import HomeSection from '../ui/HomeSection.jsx';
 import { blogPosts } from '../../data/blog.js';
 
 export default function BlogPreview() {
   return (
-    <section id="blog" className="px-6 sm:px-10 lg:px-16 py-24 border-t border-line">
-      <Reveal>
-        <div className="flex items-end justify-between gap-4 flex-wrap">
-          <SectionHeader
-            index="02"
-            label="Writing"
-            title="From the blog"
-            description="Stories from CivicPrep, library attendance systems, and my experience building with a team."
-          />
-          <Link
-            to="/blog"
-            className="mb-10 inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-widest text-ink-muted hover:text-accent transition-colors"
-          >
-            View all <ArrowRight size={14} />
-          </Link>
-        </div>
-      </Reveal>
-
-      <div className="grid md:grid-cols-2 2xl:grid-cols-3 gap-6">
-        {blogPosts.slice(0, 3).map((post, i) => (
-          <Reveal key={post.id} delay={i * 80} className="h-full">
-            <BlogCard post={post} />
-          </Reveal>
+    <HomeSection id="blog" index="02" label="Writing" title="From the blog" to="/blog" linkLabel="All articles">
+      <ul className="divide-y divide-line">
+        {blogPosts.slice(0, 2).map((post) => (
+          <li key={post.id}>
+            <Link to={post.url} className="group block rounded-sm py-4">
+              <p className="font-mono text-xs text-ink-muted">{post.category} ? {post.readingTime}</p>
+              <h3 className="mt-2 font-display text-lg font-semibold text-ink group-hover:text-accent">{post.title}</h3>
+            </Link>
+          </li>
         ))}
-      </div>
-    </section>
+      </ul>
+    </HomeSection>
   );
 }

@@ -16,6 +16,9 @@
     { "source": "/experience", "destination": "/index.html" },
     { "source": "/affiliations", "destination": "/index.html" },
     { "source": "/resume", "destination": "/index.html" },
+    { "source": "/certifications", "destination": "/index.html" },
+    { "source": "/gear", "destination": "/index.html" },
+    { "source": "/recommendations", "destination": "/index.html" },
     { "source": "/blog/:path*", "destination": "/index.html" }
   ]
 }

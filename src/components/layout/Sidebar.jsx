@@ -4,7 +4,7 @@ import ThemeToggle from '../ui/ThemeToggle.jsx';
 
 export default function Sidebar({ theme, onToggleTheme, activeSection }) {
   return (
-    <aside className="hidden lg:flex flex-col justify-between w-60 shrink-0 h-screen sticky top-0 border-r border-line px-8 py-10 bg-bg">
+    <aside className="hidden lg:flex flex-col justify-between gap-8 w-60 shrink-0 h-screen sticky top-0 overflow-y-auto border-r border-line px-8 py-10 bg-bg">
       <div>
         <NavLink to="/#home" className="block font-display text-sm font-semibold tracking-widest text-ink">
           John Raymart <span className="text-accent">TENIO</span>
@@ -13,8 +13,8 @@ export default function Sidebar({ theme, onToggleTheme, activeSection }) {
           Dev Console
         </p>
 
-        <nav className="mt-16" aria-label="Primary">
-          <ul className="space-y-5">
+        <nav className="mt-10" aria-label="Primary">
+          <ul className="space-y-4">
             {navItems.map((item) => (
               <li key={item.label}>
                 <NavLink

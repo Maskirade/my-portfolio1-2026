@@ -11,6 +11,9 @@ import ProjectDetail from './pages/ProjectDetail.jsx';
 import Experience from './pages/Experience.jsx';
 import Affiliations from './pages/Affiliations.jsx';
 import Resume from './pages/Resume.jsx';
+import Certifications from './pages/Certifications.jsx';
+import Gear from './pages/Gear.jsx';
+import Recommendations from './pages/Recommendations.jsx';
 import { useTheme } from './hooks/useTheme.js';
 import { useScrollSpy } from './hooks/useScrollSpy.js';
 import { navItems } from './data/nav.js';
@@ -62,6 +65,9 @@ export default function App() {
               <Route path="/experience" element={<Experience />} />
               <Route path="/affiliations" element={<Affiliations />} />
               <Route path="/resume" element={<Resume />} />
+              <Route path="/certifications" element={<Certifications />} />
+              <Route path="/gear" element={<Gear />} />
+              <Route path="/recommendations" element={<Recommendations />} />
             </Routes>
           </main>
           {pathname === '/' && <ProfilePanel />}

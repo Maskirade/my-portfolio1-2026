@@ -8,6 +8,11 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { build } from 'rolldown';
 import { projects } from '../src/data/projects.js';
+import { certifications } from '../src/data/certifications.js';
+import { gear } from '../src/data/gear.js';
+import { recommendations } from '../src/data/recommendations.js';
+import { techStack } from '../src/data/techStack.js';
+import { profile } from '../src/data/profile.js';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 let workspace;
@@ -25,6 +30,11 @@ before(async () => {
     "export { default as FeaturedProjects } from '../../src/components/sections/Projects.jsx';",
     "export { default as Projects } from '../../src/pages/Projects.jsx';",
     "export { default as Sidebar } from '../../src/components/layout/Sidebar.jsx';",
+    "export { default as Home } from '../../src/pages/Home.jsx';",
+    "export { default as Certifications } from '../../src/pages/Certifications.jsx';",
+    "export { default as Gear } from '../../src/pages/Gear.jsx';",
+    "export { default as Recommendations } from '../../src/pages/Recommendations.jsx';",
+    "export { default as Resume } from '../../src/pages/Resume.jsx';",
   ].join('\n'));
   const result = await build({
     input: entry,
@@ -88,9 +98,10 @@ test('homepage and all-work cards open project details without placeholder links
   }
   const home = render(components.FeaturedProjects);
   const all = render(components.Projects);
+  const featuredSlugs = projects.filter((project) => project.featured).slice(0, 2).map((project) => project.slug);
   for (const project of projects) {
     assert.ok(all.includes(`href="/projects/${project.slug}"`));
-    assert.equal(home.includes(`href="/projects/${project.slug}"`), project.featured);
+    assert.equal(home.includes(`href="/projects/${project.slug}"`), featuredSlugs.includes(project.slug));
   }
 });
 
@@ -145,4 +156,66 @@ test('code and demo links are shown only for absolute HTTP URLs and open separat
 test('direct detail-page requests are covered by the Vercel SPA rewrite', async () => {
   const config = JSON.parse(await readFile(join(root, 'vercel.json'), 'utf8'));
   assert.ok(config.rewrites.some((rewrite) => rewrite.source === '/projects/:path*' && rewrite.destination === '/index.html'));
+});
+
+test('homepage previews stay brief and point to complete collections', () => {
+  const home = render(components.Home, {}, '/');
+  const section = (id) => {
+    const html = home.match(new RegExp(`<section id="${id}"[\\s\\S]*?</section>`))?.[0];
+    assert.ok(html, `Missing homepage section: ${id}`);
+    return html;
+  };
+  const certificates = section('certifications');
+  assert.equal((certificates.match(/<li>/g) || []).length, Math.min(2, certifications.length));
+  assert.ok(certificates.includes('href="/certifications"'));
+  assert.ok(!certificates.includes('<img'));
+  assert.equal((section('projects').match(/<article/g) || []).length, Math.min(2, projects.filter((project) => project.featured).length));
+  assert.equal((section('blog').match(/<li>/g) || []).length, 2);
+  assert.equal((section('tech-stack').match(/<li>/g) || []).length, 8);
+  assert.ok(section('tech-stack').includes('href="/resume#skills"'));
+  assert.equal((section('gear').match(/<img/g) || []).length, Math.min(1, gear.length));
+  assert.ok(section('gear').includes('href="/gear"'));
+  assert.equal((section('experience').match(/<article/g) || []).length, 1);
+  assert.equal((section('recommendations').match(/<figure/g) || []).length, Math.min(1, recommendations.length));
+  assert.ok(section('recommendations').includes('href="/recommendations"'));
+  assert.ok((section('affiliation').match(/<li /g) || []).length <= 3);
+});
+
+test('detail collections preserve all items and certificate privacy protections', () => {
+  const certificates = render(components.Certifications, {}, '/certifications');
+  for (const cert of certifications) {
+    assert.ok(certificates.includes(`id="${cert.id}"`));
+    assert.ok(certificates.includes(`src="${cert.image}"`));
+    assert.ok(cert.image.endsWith('-v2.webp'));
+  }
+  assert.equal((certificates.match(/aria-haspopup="dialog"/g) || []).length, certifications.length);
+  assert.equal((certificates.match(/draggable="false"/g) || []).length, certifications.length);
+  assert.doesNotMatch(certificates, /download=|\.pdf|\.jpg|\.private\//i);
+  const allGear = render(components.Gear, {}, '/gear');
+  for (const item of gear) {
+    assert.ok(allGear.includes(`id="${item.id}"`));
+    for (const tool of item.items) assert.ok(allGear.includes(tool.replaceAll('&', '&amp;')));
+  }
+  const allRecommendations = render(components.Recommendations, {}, '/recommendations');
+  for (const item of recommendations) {
+    assert.ok(allRecommendations.includes(`id="${item.id}"`));
+    assert.ok(allRecommendations.includes(item.quote.replaceAll('&', '&amp;').replaceAll("'", '&#x27;')));
+  }
+  const resume = render(components.Resume, {}, '/resume#skills');
+  assert.ok(resume.includes('id="skills"'));
+  for (const item of profile.focus) assert.ok(resume.includes(item.value.replaceAll('&', '&amp;')));
+  for (const group of techStack) {
+    for (const item of group.items) assert.ok(resume.includes(item.replaceAll('&', '&amp;')));
+  }
+});
+
+test('new collection pages support direct Vercel requests and primary navigation', async () => {
+  const config = JSON.parse(await readFile(join(root, 'vercel.json'), 'utf8'));
+  const sidebar = render(components.Sidebar, { theme: 'dark', onToggleTheme() {} }, '/');
+  const app = await readFile(join(root, 'src/App.jsx'), 'utf8');
+  for (const path of ['/certifications', '/gear', '/recommendations']) {
+    assert.ok(config.rewrites.some((rewrite) => rewrite.source === path && rewrite.destination === '/index.html'));
+    assert.ok(app.includes(`<Route path="${path}"`));
+    assert.ok(sidebar.includes(`href="${path}"`));
+  }
 });

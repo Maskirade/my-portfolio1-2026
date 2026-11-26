@@ -39,11 +39,11 @@ export default function MobileNav({ open, onClose, activeSection }) {
       />
       <div
         ref={panelRef}
-        className={`absolute right-0 top-0 h-full w-72 bg-bg-surface border-l border-line px-6 py-6 flex flex-col transition-transform duration-300 ${
+        className={`absolute right-0 top-0 h-full w-72 overflow-y-auto bg-bg-surface border-l border-line px-6 py-6 flex flex-col transition-transform duration-300 ${
           open ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        <div className="flex items-center justify-between mb-10">
+        <div className="flex shrink-0 items-center justify-between mb-6">
           <span className="font-display text-sm font-semibold tracking-widest text-ink">
             MENU
           </span>
@@ -58,7 +58,7 @@ export default function MobileNav({ open, onClose, activeSection }) {
         </div>
 
         <nav aria-label="Mobile primary">
-          <ul className="space-y-6">
+          <ul className="space-y-4">
             {navItems.map((item) => (
               <li key={item.label}>
                 <NavLink

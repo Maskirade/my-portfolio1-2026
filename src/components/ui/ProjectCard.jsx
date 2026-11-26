@@ -5,7 +5,7 @@ import TechBadge from './TechBadge.jsx';
 import StatusDot from './StatusDot.jsx';
 import ProjectLinks from './ProjectLinks.jsx';
 
-export default function ProjectCard({ project }) {
+export default function ProjectCard({ project, compact = false }) {
   const statusKey = project.status?.toLowerCase().includes('progress') ? 'progress' : 'active';
   const detailUrl = `/projects/${project.slug}`;
 
@@ -39,12 +39,14 @@ export default function ProjectCard({ project }) {
         <h3 className="font-display text-lg font-semibold text-ink">
           <Link to={detailUrl} className="rounded-sm transition-colors hover:text-accent">{project.title}</Link>
         </h3>
-        <p className="text-sm text-ink-muted leading-relaxed flex-1">{project.description}</p>
-        <div className="flex flex-wrap gap-2">
-          {project.technologies.map((tech) => (
-            <TechBadge key={tech}>{tech}</TechBadge>
-          ))}
-        </div>
+        <p className={`text-sm text-ink-muted leading-relaxed flex-1 ${compact ? 'line-clamp-3' : ''}`}>{project.description}</p>
+        {!compact && (
+          <div className="flex flex-wrap gap-2">
+            {project.technologies.map((tech) => (
+              <TechBadge key={tech}>{tech}</TechBadge>
+            ))}
+          </div>
+        )}
         <div className="flex flex-col gap-4 pt-4 mt-auto border-t border-line">
           <Link
             to={detailUrl}
@@ -53,7 +55,7 @@ export default function ProjectCard({ project }) {
             View project <span className="sr-only">{project.title}</span>
             <ArrowRight size={15} aria-hidden="true" />
           </Link>
-          <ProjectLinks project={project} />
+          {!compact && <ProjectLinks project={project} />}
         </div>
       </div>
     </Panel>

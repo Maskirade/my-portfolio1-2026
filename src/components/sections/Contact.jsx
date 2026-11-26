@@ -12,7 +12,7 @@ export default function Contact() {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-8">
           <div>
             <span className="font-mono text-xs uppercase tracking-widest text-accent">
-              Section 10 // Contact
+              
             </span>
             <h2 className="font-display text-3xl sm:text-4xl font-semibold text-ink mt-3">
               Let's build something.

@@ -1,37 +1,19 @@
-import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
-import Reveal from '../effects/Reveal.jsx';
-import SectionHeader from '../ui/SectionHeader.jsx';
-import TimelineItem from '../ui/TimelineItem.jsx';
+import HomeSection from '../ui/HomeSection.jsx';
 import { experience } from '../../data/experience.js';
 
 export default function Experience() {
+  // The shared timeline runs from earliest to current; preview the latest entry.
+  const latest = experience.at(-1);
   return (
-    <section id="experience" className="px-6 sm:px-10 lg:px-16 py-24 border-t border-line">
-      <Reveal>
-        <div className="flex items-end justify-between gap-4 flex-wrap">
-          <SectionHeader
-            index="05"
-            label="Timeline"
-            title="Experience"
-            description="Where my time as a developer has gone so far."
-          />
-          <Link
-            to="/experience"
-            className="mb-10 inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-widest text-ink-muted hover:text-accent transition-colors"
-          >
-            Full timeline <ArrowRight size={14} />
-          </Link>
-        </div>
-      </Reveal>
-
-      <div className="max-w-2xl">
-        {experience.map((item, i) => (
-          <Reveal key={item.id} delay={i * 90}>
-            <TimelineItem item={item} isLast={i === experience.length - 1} />
-          </Reveal>
-        ))}
-      </div>
-    </section>
+    <HomeSection id="experience" index="05" label="Timeline" title="Experience" to="/experience" linkLabel="Full timeline">
+      {latest && (
+        <article className="max-w-2xl border-l-2 border-accent pl-5">
+          <p className="font-mono text-xs text-accent">{latest.date}</p>
+          <h3 className="mt-2 font-display text-lg font-semibold text-ink">{latest.role}</h3>
+          <p className="mt-1 text-sm text-ink-muted">{latest.organization}</p>
+          <p className="mt-3 text-sm leading-relaxed text-ink-muted line-clamp-3">{latest.description}</p>
+        </article>
+      )}
+    </HomeSection>
   );
 }

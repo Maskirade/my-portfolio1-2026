@@ -33,6 +33,18 @@ export default function Resume() {
         </div>
       </Reveal>
 
+      <Panel className="mb-6 rounded-sm p-6">
+        <h2 className="font-display text-lg font-semibold text-ink">Current focus</h2>
+        <dl className="mt-4 grid gap-5 sm:grid-cols-3">
+          {profile.focus.map((item) => (
+            <div key={item.label}>
+              <dt className="font-mono text-xs text-accent">{item.label}</dt>
+              <dd className="mt-2 text-sm leading-relaxed text-ink-muted">{item.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </Panel>
+
       <div className="grid lg:grid-cols-2 gap-6">
         <Reveal>
           <Panel className="p-6 rounded-sm h-full">
@@ -53,7 +65,7 @@ export default function Resume() {
         </Reveal>
 
         <Reveal delay={80}>
-          <Panel className="p-6 rounded-sm h-full">
+          <Panel id="skills" className="p-6 rounded-sm h-full scroll-mt-8">
             <span className="font-mono text-[11px] uppercase tracking-widest text-accent">
               Core skills
             </span>

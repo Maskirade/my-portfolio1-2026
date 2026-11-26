@@ -79,7 +79,7 @@ export default function Hero() {
         </div>
 
         <p className="mt-6 text-base sm:text-lg text-ink-muted leading-relaxed max-w-xl">
-          {profile.bio}
+          {profile.shortBio}
         </p>
 
         <div className="mt-10 flex flex-wrap items-center gap-4">
@@ -99,14 +99,14 @@ export default function Hero() {
 
         <dl
           aria-label="Portfolio at a glance"
-          className="mt-10 grid grid-cols-1 divide-y divide-line border-y border-line min-[400px]:grid-cols-3 min-[400px]:divide-x min-[400px]:divide-y-0"
+          className="mt-10 grid grid-cols-1 divide-y divide-line border-y border-line min-[360px]:grid-cols-3 min-[360px]:divide-x min-[360px]:divide-y-0"
         >
           {profile.heroStats.map(({ value, label }) => (
             <div
               key={label}
-              className="flex min-w-0 flex-col gap-2 py-5 min-[400px]:px-3 min-[400px]:first:pl-0 min-[400px]:last:pr-0 sm:px-5 sm:py-6 sm:first:pl-0 sm:last:pr-0"
+              className="flex min-w-0 flex-col gap-2 py-5 min-[360px]:px-2 min-[360px]:first:pl-0 min-[360px]:last:pr-0 sm:px-5 sm:py-6 sm:first:pl-0 sm:last:pr-0"
             >
-              <dt className="font-mono text-xs text-ink-muted">{label}</dt>
+              <dt className="font-mono text-[11px] text-ink-muted sm:text-xs">{label}</dt>
               <dd className="order-first font-display text-3xl font-semibold leading-none tracking-tight text-ink tabular-nums sm:text-4xl">
                 {value}
               </dd>
