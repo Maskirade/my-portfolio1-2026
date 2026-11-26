@@ -2,6 +2,7 @@ import { Download, ExternalLink } from 'lucide-react';
 import Reveal from '../components/effects/Reveal.jsx';
 import Panel from '../components/ui/Panel.jsx';
 import TechBadge from '../components/ui/TechBadge.jsx';
+import BackLink from '../components/ui/BackLink.jsx';
 import { profile } from '../data/profile.js';
 import { experience } from '../data/experience.js';
 import { techStack } from '../data/techStack.js';
@@ -9,6 +10,7 @@ import { techStack } from '../data/techStack.js';
 export default function Resume() {
   return (
     <section className="px-6 sm:px-10 lg:px-16 py-24">
+      <BackLink to="/#home" className="mb-8" />
       <Reveal>
         <div className="mb-10 max-w-2xl">
           <span className="font-mono text-xs tracking-widest text-accent uppercase">

@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import Reveal from '../components/effects/Reveal.jsx';
 import ProjectCard from '../components/ui/ProjectCard.jsx';
+import BackLink from '../components/ui/BackLink.jsx';
 import { projects } from '../data/projects.js';
 
 export default function Projects() {
@@ -15,6 +16,7 @@ export default function Projects() {
 
   return (
     <section className="px-6 sm:px-10 lg:px-16 py-24">
+      <BackLink to="/#projects" className="mb-8" />
       <Reveal>
         <div className="mb-10 max-w-2xl">
           <span className="font-mono text-xs tracking-widest text-accent uppercase">

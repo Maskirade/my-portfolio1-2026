@@ -2,6 +2,7 @@ import { ArrowUpRight } from 'lucide-react';
 import Reveal from '../components/effects/Reveal.jsx';
 import Panel from '../components/ui/Panel.jsx';
 import AffiliationIcon from '../components/ui/AffiliationIcon.jsx';
+import BackLink from '../components/ui/BackLink.jsx';
 import { profile } from '../data/profile.js';
 
 export default function Affiliations() {
@@ -9,6 +10,7 @@ export default function Affiliations() {
 
   return (
     <section className="px-6 sm:px-10 lg:px-16 py-24">
+      <BackLink to="/#affiliation" className="mb-8" />
       <Reveal>
         <div className="mb-14 max-w-2xl">
           <span className="font-mono text-xs uppercase tracking-widest text-accent">Connections</span>

@@ -1,5 +1,6 @@
 import Reveal from '../components/effects/Reveal.jsx';
 import BlogCard from '../components/ui/BlogCard.jsx';
+import BackLink from '../components/ui/BackLink.jsx';
 import { blogPosts } from '../data/blog.js';
 
 export default function Blog() {
@@ -8,6 +9,7 @@ export default function Blog() {
   return (
     <section className="px-6 sm:px-10 lg:px-16 py-16 sm:py-24">
       <div className="mx-auto max-w-5xl">
+        <BackLink to="/#blog" className="mb-8" />
         <Reveal>
           <div className="mb-12 max-w-2xl">
             <span className="font-mono text-xs tracking-widest text-accent uppercase">

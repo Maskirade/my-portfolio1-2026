@@ -1,10 +1,12 @@
 import Reveal from '../components/effects/Reveal.jsx';
 import TimelineItem from '../components/ui/TimelineItem.jsx';
+import BackLink from '../components/ui/BackLink.jsx';
 import { experience } from '../data/experience.js';
 
 export default function Experience() {
   return (
     <section className="px-6 sm:px-10 lg:px-16 py-24">
+      <BackLink to="/#experience" className="mb-8" />
       <Reveal>
         <div className="mb-14 max-w-2xl">
           <span className="font-mono text-xs tracking-widest text-accent uppercase">
